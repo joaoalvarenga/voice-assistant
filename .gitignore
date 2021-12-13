@@ -1,3 +1,5 @@
 *.pyc
 *.egg-info
 .idea
+*.json
+*.pth.tar

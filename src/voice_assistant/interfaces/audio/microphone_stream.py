@@ -52,7 +52,7 @@ class MicrophoneStream(AudioStream):
         self.sample_rate = sample_rate
 
     def get_frames(self) -> bytes:
-        frame = self.stream.read(self.chunk)
+        frame = self.stream.read(self.chunk, exception_on_overflow=False)
         is_speech = self.vad.is_speech(frame, self.sample_rate)
         if is_speech:
             return frame

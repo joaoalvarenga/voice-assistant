@@ -1,3 +1,7 @@
 transformers
 numpy
 num2words
+halo
+TTS @ git+https://github.com/Edresson/Coqui-TTS@multilingual-torchaudio-SE
+torchaudio==0.9.0
+gdown

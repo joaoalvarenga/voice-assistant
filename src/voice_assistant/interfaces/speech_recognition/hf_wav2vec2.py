@@ -13,7 +13,7 @@ class Wav2Vec2Engine(SpeechRecognitionEngine):
 
     def recognize(self, signal: bytes) -> str:
         signal = np.frombuffer(signal, dtype=np.int16) / 32767
-        inputs = self.processor([signal], return_tensors="pt", padding=True)
+        inputs = self.processor([signal], return_tensors="pt", padding=True, sampling_rate=16_000)
         with torch.no_grad():
             logits = self.model(inputs.input_values.to(self.device),
                                 attention_mask=inputs.attention_mask.to("cuda")).logits
