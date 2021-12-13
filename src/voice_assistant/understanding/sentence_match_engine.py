@@ -7,21 +7,10 @@ from voice_assistant.understanding import UnderstadingEngine
 
 class SentenceMatchEngine(UnderstadingEngine):
     def __init__(self):
-        self.sentences = {
-            'que horas são': Action(
-                name='what time is',
-                command=TimeCommand.build_command,
-                parameters={
-                    'parameters': CommandParameters(
-                        function_args=dict(),
-                        function_name='what_time_is'
-                    )
-                }
-            )
-        }
+        super().__init__()
 
     def extract_action_from_text(self, text: str) -> Optional[Action]:
-        for sentence in self.sentences:
+        for sentence in self.actions:
             if text.lower().find(sentence) > -1:
-                return self.sentences[sentence]
+                return self.actions[sentence]
         return None

@@ -10,6 +10,6 @@ class TestSentenceMatchEngine(unittest.TestCase):
         action_response = sentence_match_engine.extract_action_from_text('ok google que horas são')
         self.assertIsNotNone(action_response)
 
-        command_response = action_response.command(**action_response.parameters).execute()
+        command_response = action_response.command(action_response.parameters).execute()
         self.assertIsNotNone(command_response)
         self.assertEqual(command_response, datetime.now().strftime('%H horas e %M minutos'))

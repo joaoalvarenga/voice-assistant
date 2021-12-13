@@ -2,6 +2,7 @@ from typing import Optional
 
 import pyaudio
 import webrtcvad
+from voice_assistant.core import PyAudioSingleton
 from voice_assistant.interfaces.audio import AudioStream
 
 
@@ -36,14 +37,12 @@ class MicrophoneStream(AudioStream):
                  ):
         self.vad = webrtcvad.Vad()
         self.vad.set_mode(vad_mode)
-
-        self.audio = pyaudio.PyAudio()
         self.chunk = int(sample_rate * frame_duration / 1000)
 
-        microphones = list_microphones(self.audio)
+        microphones = list_microphones(PyAudioSingleton.get_instance().py_audio)
         selected_input_device_id = get_input_device_id(device_name, microphones)
 
-        self.stream = self.audio.open(input_device_index=selected_input_device_id,
+        self.stream = PyAudioSingleton.get_instance().py_audio.open(input_device_index=selected_input_device_id,
                                       format=format,
                                       channels=channels,
                                       rate=sample_rate,
@@ -60,5 +59,3 @@ class MicrophoneStream(AudioStream):
 
     def stop(self):
         self.stream.stop_stream()
-        self.stream.close()
-        self.audio.terminate()

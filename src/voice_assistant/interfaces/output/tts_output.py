@@ -8,6 +8,7 @@ from TTS.config import load_config
 from TTS.tts.models import setup_model
 from TTS.tts.utils.synthesis import synthesis
 from TTS.utils.audio import AudioProcessor
+from voice_assistant.core import PyAudioSingleton
 
 from voice_assistant.interfaces.output import Output
 
@@ -56,8 +57,7 @@ class TTSOutput(Output):
         # synthesize voice
         use_griffin_lim = False
         self.language_id = 2
-        self.pyaudio = pyaudio.PyAudio()
-        self.stream = self.pyaudio.open(format=pyaudio.paInt16, channels=1,
+        self.stream = PyAudioSingleton.get_instance().py_audio.open(format=pyaudio.paInt16, channels=1,
                                    rate=self.audio_processor.sample_rate, output=True)
 
     def syntethize(self, text: str):
@@ -88,3 +88,6 @@ class TTSOutput(Output):
 
     def render_not_recognized(self):
         self.syntethize(self._not_recognized[self.language])
+
+    def stop(self):
+        self.stream.close()

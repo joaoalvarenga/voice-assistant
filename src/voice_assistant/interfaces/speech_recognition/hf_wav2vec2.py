@@ -18,4 +18,4 @@ class Wav2Vec2Engine(SpeechRecognitionEngine):
             logits = self.model(inputs.input_values.to(self.device),
                                 attention_mask=inputs.attention_mask.to("cuda")).logits
             pred_ids = torch.argmax(logits, dim=-1)
-            return self.processor.batch_decode(pred_ids)[0]
+            return self.processor.batch_decode(pred_ids)[0].lower()

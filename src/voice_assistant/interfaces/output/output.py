@@ -16,3 +16,7 @@ class Output(ABC):
     @abstractmethod
     def render_not_recognized(self):
         raise NotImplemented()
+
+    @abstractmethod
+    def stop(self):
+        raise NotImplemented()
