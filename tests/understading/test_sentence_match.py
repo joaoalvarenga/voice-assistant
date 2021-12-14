@@ -5,8 +5,10 @@ from voice_assistant.commands import TimeCommand
 from voice_assistant.entities import CommandParameters
 from voice_assistant.understanding import SentenceMatchEngine
 
+from tests import BaseTest
 
-class TestSentenceMatchEngine(unittest.TestCase):
+
+class TestSentenceMatchEngine(BaseTest):
     def test_what_time_is(self):
         sentence_match_engine = SentenceMatchEngine()
         action_response = sentence_match_engine.extract_action_from_text('ok google que horas são')
