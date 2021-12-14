@@ -7,6 +7,7 @@ python -m pip install .
 ```
 
 ### Main Features:
+- 🏭 Fully open-source, including models!
 - 🎙️ Speech Recognition (🇧🇷)
 - 💡 Intent Classification (🇧🇷)
 - ❓ Question Answering (🇧🇷)
