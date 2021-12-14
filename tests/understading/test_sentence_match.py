@@ -1,6 +1,8 @@
 import unittest
 from datetime import datetime
 
+from voice_assistant.commands import TimeCommand
+from voice_assistant.entities import CommandParameters
 from voice_assistant.understanding import SentenceMatchEngine
 
 
@@ -12,4 +14,5 @@ class TestSentenceMatchEngine(unittest.TestCase):
 
         command_response = action_response.command(action_response.parameters).execute()
         self.assertIsNotNone(command_response)
-        self.assertEqual(command_response, datetime.now().strftime('%H horas e %M minutos'))
+        self.assertEqual(command_response, TimeCommand.build_command(
+            CommandParameters(function_name='what_time_is')).execute())
