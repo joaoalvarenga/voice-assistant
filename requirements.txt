@@ -8,3 +8,4 @@ gdown
 sentence-transformers
 pydantic
 babel
+pyaudio
