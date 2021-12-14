@@ -1,5 +1,5 @@
 ## 🤖 voice assistant
-An open-source Alexa-like  complete voice assistant system, from speech recognition to question answering
+An open-source Alexa-like  complete voice assistant system, from speech recognition to question answering. It's all built in 😉, **no external API is required**.
 
 ```bash
 git clone https://github.com/joaoalvarenga/voice-assistant.git
