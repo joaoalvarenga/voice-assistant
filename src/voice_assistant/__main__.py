@@ -8,24 +8,32 @@ from voice_assistant.interfaces.output import Output, TTSOutput
 from voice_assistant.interfaces.speech_recognition import Wav2Vec2Engine, SpeechRecognitionEngine
 from voice_assistant.understanding import UnderstadingEngine, IntentEngine
 
+DEBOUNCE_TIME = 10
 
 def main(audio_stream: AudioStream,
          asr_engine: SpeechRecognitionEngine,
          understanding_engine: UnderstadingEngine,
          output: Output):
     buffer = b''
+    debounce = DEBOUNCE_TIME
     spinner = Halo(text='Me pergunte as horas, ou peça pra tocar música...', spinner='dots')
     while True:
         try:
             spinner.start()
             frame = audio_stream.get_frames()
             if len(frame) > 0:
+                debounce = DEBOUNCE_TIME
                 buffer += frame
                 continue
 
             if len(buffer) == 0:
                 buffer = b''
                 continue
+            if debounce > 0:
+                debounce -= 1
+                continue
+
+            debounce = DEBOUNCE_TIME
             text = asr_engine.recognize(buffer)
             buffer = b''
             if len(text) == 0:
@@ -39,6 +47,7 @@ def main(audio_stream: AudioStream,
                 continue
             command_response = action_response.command(action_response.parameters).execute()
             output.render(command_response)
+
 
 
         except KeyboardInterrupt:
