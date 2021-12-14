@@ -9,3 +9,5 @@ sentence-transformers
 pydantic
 babel
 pyaudio
+webrtcvad
+ffmpeg
