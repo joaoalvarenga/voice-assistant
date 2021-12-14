@@ -1,11 +1,10 @@
-from typing import Callable, Dict
+from typing import Callable
 
-from dataclasses import dataclass
+from pydantic import BaseModel
 from voice_assistant.entities import CommandParameters
 
 
-@dataclass
-class Action:
+class Action(BaseModel):
     name: str
     command: Callable
     parameters: CommandParameters

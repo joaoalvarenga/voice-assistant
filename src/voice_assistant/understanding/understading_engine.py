@@ -16,6 +16,20 @@ class UnderstadingEngine(ABC):
                     function_name='what_time_is'
                 )
             ),
+            'que dia é hoje': Action(
+                name='today is',
+                command=TimeCommand.build_command,
+                parameters=CommandParameters(
+                    function_name='today_is'
+                )
+            ),
+            'amanhã será': Action(
+                name='tomorrow',
+                command=TimeCommand.build_command,
+                parameters=CommandParameters(
+                    function_name='tomorrow'
+                )
+            ),
             'tocar música': Action(
                 name='play',
                 command=MusicCommand.build_command,

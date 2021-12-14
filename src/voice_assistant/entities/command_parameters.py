@@ -1,9 +1,7 @@
-from typing import Dict
+from typing import Dict, Any
+from pydantic import BaseModel
 
-from dataclasses import dataclass
 
-
-@dataclass
-class CommandParameters:
+class CommandParameters(BaseModel):
     function_name: str
-    function_args: Dict[str, object]
+    function_args: Dict[str, Any] = dict()
